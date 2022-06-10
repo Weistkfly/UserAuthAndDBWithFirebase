@@ -1,9 +1,6 @@
 package com.example.usermanagementfirebase.di
 
-import com.example.usermanagementfirebase.data.AuthRepository
-import com.example.usermanagementfirebase.data.BaseAuthRepository
-import com.example.usermanagementfirebase.data.BaseAuthenticator
-import com.example.usermanagementfirebase.data.FirebaseAuthenticator
+import com.example.usermanagementfirebase.data.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,5 +21,11 @@ object AppModule {
     @Provides
     fun provideRepository(authenticator : BaseAuthenticator) : BaseAuthRepository {
         return AuthRepository(authenticator)
+    }
+
+    @Singleton
+    @Provides
+    fun provideDbRepository(): RealTimeDatabaseRepository{
+        return RealTimeDatabaseImpl()
     }
 }

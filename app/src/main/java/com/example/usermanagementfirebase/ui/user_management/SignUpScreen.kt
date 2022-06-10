@@ -1,4 +1,4 @@
-package com.example.usermanagementfirebase.ui_user_management.sign_up
+package com.example.usermanagementfirebase.ui.user_management.sign_up
 
 
 import androidx.compose.foundation.clickable
@@ -10,10 +10,8 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,28 +25,26 @@ import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.usermanagementfirebase.R
 import com.example.usermanagementfirebase.UiEvent
-import com.example.usermanagementfirebase.util.Routes
+import com.example.usermanagementfirebase.ui.user_management.MainViewModel
 
 @Composable
 fun SignUpScreen(
     onPopBackStack: () -> Unit,
-    viewModel: SignUpViewModel = hiltViewModel()
+    viewModel: MainViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
-    var user by remember { mutableStateOf(TextFieldValue("")) }
-    var userPassword by remember { mutableStateOf(TextFieldValue("")) }
+    var email by remember { mutableStateOf(TextFieldValue("")) }
+    var password by remember { mutableStateOf(TextFieldValue("")) }
     var name by remember { mutableStateOf(TextFieldValue("")) }
     var lastname by remember { mutableStateOf(TextFieldValue("")) }
     var phoneNumber by remember { mutableStateOf(TextFieldValue("")) }
     var sex by remember { mutableStateOf(true) }
-    var birthDate by remember { mutableStateOf(TextFieldValue("")) }
     var expanded by remember { mutableStateOf(false) }
     var province by remember { mutableStateOf(TextFieldValue("")) }
     var address by remember { mutableStateOf(TextFieldValue("")) }
@@ -89,8 +85,8 @@ fun SignUpScreen(
                 textAlign = TextAlign.Start
             )
             OutlinedTextField(
-                value = user,
-                onValueChange = { user = it },
+                value = email,
+                onValueChange = { email = it },
                 label = { Text(text = "Email") },
                 placeholder = { Text(text = "JohnDoe@mail.com") },
                 keyboardOptions = KeyboardOptions(
@@ -103,8 +99,8 @@ fun SignUpScreen(
                 )
             )
             OutlinedTextField(
-                value = userPassword,
-                onValueChange = { userPassword = it },
+                value = password,
+                onValueChange = { password = it },
                 label = { Text(text = "Password") },
                 placeholder = { Text(text = "*********") },
                 keyboardOptions = KeyboardOptions(
@@ -183,7 +179,6 @@ fun SignUpScreen(
                     selected = sex,
                     onClick = { sex = true
                     }
-
                 )
                 Text(text = "Masculine")
                 RadioButton(
@@ -193,7 +188,7 @@ fun SignUpScreen(
                 )
                 Text(text = "Feminine")
             }
-            ShowDatePicker(context = context)
+            val birthDate = showDatePicker(context = context)
             val icon = if (expanded)
                 Icons.Filled.KeyboardArrowUp
             else
@@ -204,8 +199,6 @@ fun SignUpScreen(
                 onValueChange = { country = it },
                 modifier = Modifier
                     .onGloballyPositioned { coordinates ->
-                        // This value is used to assign to
-                        // the DropDown the same width
                         mTextFieldSize = coordinates.size.toSize()
                     },
                 label = { Text("Country") },
@@ -253,19 +246,21 @@ fun SignUpScreen(
                 ),
                 keyboardActions = KeyboardActions(
                     onGo = {
-                        viewModel.onEvent(SignUpEvent.SignUpUser(user.text, userPassword.text))
+                        viewModel.onEvent(SignUpEvent.SignUpUser(email.text, password.text))
+                        viewModel.onEvent(SignUpEvent.RegisterUserInfo(name.text, lastname.text, phoneNumber.text, sex, birthDate, country, province.text, address.text))
                     }
                 )
             )
             Button(
                 onClick = {
-                    viewModel.onEvent(SignUpEvent.SignUpUser(user.text, userPassword.text))
+                    viewModel.onEvent(SignUpEvent.SignUpUser(email.text, password.text))
+                    viewModel.onEvent(SignUpEvent.RegisterUserInfo(name.text, lastname.text, phoneNumber.text, sex, birthDate, country, province.text, address.text))
                 }) {
                 Text(text = "Sign up")
             }
             TextButton(
                 onClick = {
-                    //viewModel.onEvent(UiEvent.Navigate(Routes.LOGIN_SCREEN))
+                    viewModel.onEvent(SignUpEvent.NavigateToLogin)
                 }) {
                 Text(
                     text = "Already have an account? Login",

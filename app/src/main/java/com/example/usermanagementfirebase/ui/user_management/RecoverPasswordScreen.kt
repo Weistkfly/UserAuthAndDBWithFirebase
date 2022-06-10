@@ -1,4 +1,4 @@
-package com.example.usermanagementfirebase.ui_user_management.recover_password
+package com.example.usermanagementfirebase.ui.user_management.recover_password
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,10 +10,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.usermanagementfirebase.UiEvent
+import com.example.usermanagementfirebase.ui.user_management.MainViewModel
 
 @Composable
 fun RecoverPasswordScreen(
-    viewModel: RecoverPasswordViewModel = hiltViewModel()
+    viewModel: MainViewModel = hiltViewModel()
 ) {
     var email by remember { mutableStateOf(TextFieldValue("")) }
     val scaffoldState = rememberScaffoldState()

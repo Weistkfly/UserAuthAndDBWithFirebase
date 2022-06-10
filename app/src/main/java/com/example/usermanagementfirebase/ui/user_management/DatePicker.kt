@@ -1,4 +1,4 @@
-package com.example.usermanagementfirebase.ui_user_management.sign_up
+package com.example.usermanagementfirebase.ui.user_management.sign_up
 
 import android.app.DatePickerDialog
 import android.content.Context
@@ -10,12 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import java.util.*
 
 @Composable
-fun ShowDatePicker(context: Context){
+fun showDatePicker(
+    context: Context
+): String{
 
     val year: Int
     val month: Int
@@ -31,21 +31,20 @@ fun ShowDatePicker(context: Context){
     val datePickerDialog = DatePickerDialog(
         context,
         { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
-            date.value = "$dayOfMonth/$month/$year"
-        }, year, month+1, day
+            date.value = "$dayOfMonth/${month+1}/$year"
+        }, year, month, day
     )
 
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         Text(text = "Selected Date: ${date.value}")
-        Spacer(modifier = Modifier.size(16.dp))
         Button(onClick = {
             datePickerDialog.show()
         }) {
             Text(text = "Select date")
         }
     }
+    return date.value
 }

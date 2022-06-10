@@ -1,4 +1,4 @@
-package com.example.usermanagementfirebase.ui_user_management.login
+package com.example.usermanagementfirebase.ui.user_management
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,11 +14,12 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.usermanagementfirebase.UiEvent
+import com.example.usermanagementfirebase.ui.user_management.MainViewModel
 
 @Composable
 fun LoginScreen(
     onNavigate: (UiEvent.Navigate) -> Unit,
-    viewModel: LoginViewModel = hiltViewModel()
+    viewModel: MainViewModel = hiltViewModel()
 ) {
     var email by remember { mutableStateOf(TextFieldValue("")) }
     var userPassword by remember { mutableStateOf(TextFieldValue("")) }

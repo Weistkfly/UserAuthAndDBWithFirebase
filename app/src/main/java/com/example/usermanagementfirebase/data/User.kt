@@ -3,14 +3,12 @@ package com.example.usermanagementfirebase.data
 import java.util.*
 
 data class User(
-    val name: String,
-    val lastName: String,
-    val phoneNumber: String,
-    val sex: String,
-    val birthDate: Long,
-    val country: String,
-    val state: String,
-    val address: String
+    val name: String? = null,
+    val lastName: String? = null,
+    val phoneNumber: String? = null,
+    val sex: String? = null,
+    val birthDate: String? = null,
+    val country: String? = null,
+    val state: String? = null,
+    val address: String? = null
 )
-//nombre, apellido, teléfono, correo electrónico, sexo,
-//fecha de nacimiento, país, provincia o estado y dirección.

@@ -6,17 +6,15 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.usermanagementfirebase.ui.theme.UserManagementFirebaseTheme
-import com.example.usermanagementfirebase.ui_user_management.login.LoginScreen
-import com.example.usermanagementfirebase.ui_user_management.recover_password.RecoverPasswordScreen
-import com.example.usermanagementfirebase.ui_user_management.sign_up.SignUpScreen
-import com.example.usermanagementfirebase.ui_user_management.user_profile.UserProfileScreen
+import com.example.usermanagementfirebase.ui.user_management.LoginScreen
+import com.example.usermanagementfirebase.ui.user_management.recover_password.RecoverPasswordScreen
+import com.example.usermanagementfirebase.ui.user_management.sign_up.SignUpScreen
+import com.example.usermanagementfirebase.ui.user_management.user_profile.UserProfileScreen
 import com.example.usermanagementfirebase.util.Routes
 import dagger.hilt.android.AndroidEntryPoint
 

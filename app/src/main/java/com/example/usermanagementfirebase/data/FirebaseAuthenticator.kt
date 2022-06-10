@@ -6,7 +6,7 @@ import com.google.firebase.ktx.Firebase
 
 class FirebaseAuthenticator : BaseAuthenticator {
     override suspend fun signUpWithEmailPassword(email: String, password: String): FirebaseUser? {
-        Firebase.auth.createUserWithEmailAndPassword(email, password)
+        Firebase.auth.createUserWithEmailAndPassword(email, password).isComplete
         return Firebase.auth.currentUser
     }
 
